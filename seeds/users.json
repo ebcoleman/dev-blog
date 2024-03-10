@@ -1,5 +1,15 @@
 [
-    { "username": "user1", "password": "password1" },
-    { "username": "user2", "password": "password2" }
+    { "username": "crazyhorse73", 
+      "email": "crazyhorse73@mail.com", 
+      "password": "password1" 
+    },
+    { "username": "codeMaster", 
+      "email": "codeMaster@mail.com", 
+      "password": "password123" 
+    },
+    { "username": "alpine86", 
+      "email": "albert.douglas@mail.com", 
+      "password": "password321" 
+    }
 ]
   
