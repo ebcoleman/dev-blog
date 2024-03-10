@@ -1,6 +1,15 @@
 [
-    { 
-        "comment_body": "That is a great fact about the history of HTML!" 
+    {
+      "comment_body": "Great post! I really enjoyed reading it.",
+      "date_created": "2024-03-10T22:34:48",
+      "post_id": 1,
+      "user_id": 1
+    },
+    {
+      "comment_body": "Interesting topic. Can't wait to read more about it.",
+      "date_created": "2024-03-11T10:15:00",
+      "post_id": 2,
+      "user_id": 2
     }
-]
+  ]
   
