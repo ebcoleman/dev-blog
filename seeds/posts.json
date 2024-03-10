@@ -1,5 +1,12 @@
 [
-    { "title": "Post 1", "content": "Content of Post 1", "userId": 1 },
-    { "title": "Post 2", "content": "Content of Post 2", "userId": 2 }
+    { "post_title": "Welcome!", 
+      "post_body": "HelloWorld"
+    },
+    { "post_title": "HTML interesting fact from ChatGPT", 
+      "post_body": "An interesting fact about HTML (HyperText Markup Language) is that it was first proposed by Tim Berners-Lee in 1989 while he was working at CERN, the European Organization for Nuclear Research. He envisioned HTML as a way to share and distribute scientific documents among researchers. Initially, HTML was a simple markup language with just 18 tags, but over time it has evolved into a robust language for creating complex web pages and applications on the World Wide Web. This evolution has been driven by various organizations and communities contributing to its development, resulting in the diverse ecosystem of HTML we see today."
+    },
+    { "post_title": "Post #3", 
+      "post_body": "Insert post here."
+    }
 ]
   
