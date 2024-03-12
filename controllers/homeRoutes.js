@@ -24,7 +24,8 @@ router.get('/', async (req, res) => {
       logged_in: req.session.logged_in 
     });
   } catch (err) {
-    res.status(500).json(err);
+    console.error(err); 
+    res.status(500).json({ error: 'Internal server error' }); 
   }
 });
 
@@ -40,6 +41,11 @@ router.get('/post/:id', async (req, res) => {
       ],
     });
 
+    if (!postData) {
+      // Handle case where post is not found
+      return res.status(404).json({ error: 'Post not found' });
+    }
+
     const post = postData.get({ plain: true });
 
     res.render('postDetail', {
@@ -47,18 +53,22 @@ router.get('/post/:id', async (req, res) => {
       logged_in: req.session.logged_in
     });
   } catch (err) {
-    res.status(500).json(err);
+    console.error(err); // Log the error for debugging
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 
 // Route to get user profile
 router.get('/profile', withAuth, async (req, res) => {
   try {
-    // Find the logged in user based on the session ID
-    const userData = await User.findByPk(req.session.user_id, {
+      const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
       include: [{ model: Post }],
     });
+
+    if (!userData) {
+        return res.status(404).json({ error: 'User not found' });
+    }
 
     const user = userData.get({ plain: true });
 
@@ -67,13 +77,13 @@ router.get('/profile', withAuth, async (req, res) => {
       logged_in: true
     });
   } catch (err) {
-    res.status(500).json(err);
+    console.error(err); 
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 
 // Route to render login page
 router.get('/login', (req, res) => {
-  // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {
     res.redirect('/profile');
     return;

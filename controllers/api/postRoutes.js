@@ -1,33 +1,37 @@
-// const express = require('express');
-// const router = express.Router();
-
-// // Post creation route
-// router.post('/create', (req, res) => {
-//   // Logic to create a new post
-//   res.redirect('/posts'); // Redirect to the list of posts after creating a new post
-// });
-
-// // Post detail route
-// router.get('/:id', (req, res) => {
-//   // Logic to retrieve post details from the database based on the ID
-//   res.render('postDetail', { title: 'Post Detail' }); // Render post detail page using a handlebars template
-// });
-
-// module.exports = router;
-
 const express = require('express');
 const router = express.Router();
+const { Post, User } = require('../../models');
 
 // Post creation route
-router.post('/create', (req, res) => {
-  // Logic to create a new post
-  res.redirect('/posts'); // Redirect to the list of posts after creating a new post
+router.post('/create', async (req, res) => {
+  try {
+    const newPost = await Post.create({
+      post_title: req.body.post_title,
+      post_body: req.body.post_body,
+      user_id: req.session.user_id,
+    });
+    res.redirect('/posts'); 
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 // Post detail route
-router.get('/:id', (req, res) => {
-  // Logic to retrieve post details from the database based on the ID
-  res.render('postDetail', { title: 'Post Detail' }); // Render post detail page using a handlebars template
+router.get('/:id', async (req, res) => {
+  try {
+    const postData = await Post.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ['username'],
+        },
+      ],
+    });
+    const post = postData.get({ plain: true });
+    res.render('postDetail', { post, title: 'Post Detail' });
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 module.exports = router;
